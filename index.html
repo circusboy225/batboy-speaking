@@ -44,7 +44,7 @@
 
     <div id="text-box" onclick="nextLine()"></div>
 
-    <audio id="audio-player" loop></audio>
+    <audio id="audio-player"></audio>
 
     <script>
         const texts = [
@@ -80,6 +80,7 @@
 
         function stopAudio() {
             audioPlayer.pause();
+            audioPlayer.currentTime = 0;
         }
 
         function typeText() {
@@ -89,16 +90,12 @@
                 setTimeout(typeText, 50);
             } else {
                 typing = false;
-                stopAudio();
+                stopAudio(); // Stop the audio when typing finishes
             }
         }
 
         function nextLine() {
             if (typing) return;
-
-            if (!audioPlayer.paused && audioPlayer.currentTime >= audioPlayer.duration - 1) {
-                playAudio();
-            }
 
             textIndex++;
 
