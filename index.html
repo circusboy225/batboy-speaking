@@ -34,10 +34,6 @@
             min-height: 50px;
             cursor: pointer;
         }
-        a {
-            color: white;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
@@ -57,7 +53,7 @@
             "if i try to help you at all, it'd be too easy, so i'm going to let you figure this out on your own.",
             "good luck.",
             "actually, bad luck.",
-            "Click to continue."
+            "click my button when you're ready"
         ];
 
         const images = [
@@ -91,14 +87,10 @@
             if (charIndex < texts[textIndex].length) {
                 textBox.innerHTML += texts[textIndex][charIndex];
                 charIndex++;
-                setTimeout(typeText, 25);  // Make the text appear 2x faster
+                setTimeout(typeText, 25);
             } else {
                 typing = false;
                 stopAudio();
-                if (textIndex === texts.length - 1) {
-                    // Replace the "Click to continue" text with a link
-                    textBox.innerHTML = '<a href="https://www.mycircus.party/its-here/batboy/game-start">Click to continue</a>';
-                }
             }
         }
 
