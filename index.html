@@ -78,6 +78,10 @@
             audioPlayer.play();
         }
 
+        function stopAudio() {
+            audioPlayer.pause();
+        }
+
         function typeText() {
             if (charIndex < texts[textIndex].length) {
                 textBox.innerHTML += texts[textIndex][charIndex];
@@ -85,6 +89,7 @@
                 setTimeout(typeText, 50);
             } else {
                 typing = false;
+                stopAudio();
             }
         }
 
