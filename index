@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talking Text Box</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #222;
+            padding: 20px;
+            color: white;
+        }
+        #image-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        #image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #text-box {
+            display: inline-block;
+            width: 60%;
+            padding: 15px;
+            font-size: 24px;
+            color: white;
+            border: 3px solid white;
+            background-color: black;
+            min-height: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="image-container">
+        <img id="display-image" src="https://raw.githubusercontent.com/circusboy225/batboy-speaking/main/batboy.png" alt="Talking Image">
+    </div>
+
+    <div id="text-box" onclick="nextLine()"></div>
+
+    <audio id="audio-player"></audio>
+
+    <script>
+        const texts = [
+            "hi, i'm batboy, i have a puzzle for you and this time you aren't going to win.",
+            "if i try to help you at all, it'd be too easy, so i'm going to let you figure this out on your own.",
+            "good luck.",
+            "actually, bad luck.",
+            "Click to continue."
+        ];
+
+        const images = [
+            "https://raw.githubusercontent.com/circusboy225/batboy-speaking/main/batboy.png",
+            "https://raw.githubusercontent.com/circusboy225/batboy-speaking/main/batboy2.png"
+        ];
+
+        const audioFile = "https://raw.githubusercontent.com/circusboy225/batboy-speaking/main/talkingsound.mp3";
+
+        let textBox = document.getElementById("text-box");
+        let imageElement = document.getElementById("display-image");
+        let audioPlayer = document.getElementById("audio-player");
+
+        let textIndex = 0;
+        let imageIndex = 0;
+        let charIndex = 0;
+        let typing = false;
+
+        function typeText() {
+            if (charIndex < texts[textIndex].length) {
+                textBox.innerHTML += texts[textIndex][charIndex];
+                charIndex++;
+                setTimeout(typeText, 50);
+            } else {
+                typing = false;
+            }
+        }
+
+        function playAudio() {
+            audioPlayer.src = audioFile;
+            audioPlayer.play();
+        }
+
+        function nextLine() {
+            if (typing) return;
+            textIndex++;
+
+            if (textIndex < texts.length) {
+                textBox.innerHTML = "";
+                charIndex = 0;
+                typing = true;
+
+                imageIndex = (imageIndex + 1) % images.length;
+                imageElement.src = images[imageIndex];
+
+                playAudio();
+                typeText();
+            } else {
+                window.location.href = "https://sites.google.com/view/my-circus/its-here/batboy/game-start";
+            }
+        }
+
+        playAudio();
+        typeText();
+    </script>
+
+</body>
+</html>
