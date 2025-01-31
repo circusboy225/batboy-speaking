@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3;url=https://www.mycircus.party/its-here/batboy/game-start">
     <title>Talking Text Box</title>
     <style>
         body {
@@ -87,10 +88,10 @@
             if (charIndex < texts[textIndex].length) {
                 textBox.innerHTML += texts[textIndex][charIndex];
                 charIndex++;
-                setTimeout(typeText, 50);
+                setTimeout(typeText, 25);  // Make the text appear 2x faster (50 -> 25)
             } else {
                 typing = false;
-                stopAudio(); 
+                stopAudio();
             }
         }
 
@@ -110,7 +111,7 @@
                 playAudio();
                 typeText();
             } else {
-                window.location.href = "https://www.mycircus.party/its-here/batboy/game-start"; // Updated Full URL
+                window.location.href = "https://www.mycircus.party/its-here/batboy/game-start"; 
             }
         }
 
